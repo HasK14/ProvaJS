@@ -29,7 +29,9 @@ router.post("/register", async (req, res) => {
     user.password = hashedPassword;
     const savedUser = await saveUser(user);
     delete savedUser.password;
-    res.json({ user: savedUser });
+    res.status(201).json({
+      user: savedUser,
+    });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(422).json({
